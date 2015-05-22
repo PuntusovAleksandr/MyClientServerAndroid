@@ -25,6 +25,7 @@ public class MyServer {
                 serverSocket = new ServerSocket(5678, 10);
                 System.out.println("Server is create");
                 socket = serverSocket.accept();
+                System.out.println("Connect is: "+ socket.toString());
                 output = new ObjectOutputStream(socket.getOutputStream());
                 input = new ObjectInputStream(socket.getInputStream());
                 System.out.println("Your message is: " + (String) input.readObject());
