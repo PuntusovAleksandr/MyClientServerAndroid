@@ -1,4 +1,4 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -10,61 +10,153 @@
 
     <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_marginLeft="32dp"
+            android:layout_alignParentTop="true" android:layout_marginTop="32dp">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Enter IP"
-                android:id="@+id/textView2" android:layout_column="1"/>
+                android:id="@+id/textView2" android:layout_column="0"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textId" android:layout_column="2" android:layout_weight="1"/>
+                android:id="@+id/textId" android:layout_column="1" android:layout_weight="1"/>
     </TableRow>
     <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_marginLeft="32dp"
+            android:layout_alignParentTop="true" android:layout_marginTop="105dp">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Enter PORT"
-                android:id="@+id/textView3" android:layout_column="1"/>
+                android:id="@+id/textView3" android:layout_column="0"/>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/textPort" android:layout_column="2" android:layout_weight="1"/>
+                android:id="@+id/textPort" android:layout_column="1" android:layout_weight="1"/>
     </TableRow>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/editText" android:layout_row="0" android:layout_column="0" android:layout_columnSpan="2"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Connect"
-            android:id="@+id/btnConnect" android:layout_row="1" android:layout_column="0"
-            android:onClick="clickButton"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Send"
-            android:id="@+id/btnSend" android:layout_row="1" android:layout_column="1" android:onClick="clickButton"/>
     <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_marginLeft="32dp"
+            android:layout_alignParentTop="true" android:layout_marginTop="178dp">
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText" android:layout_weight="1"/>
+    </TableRow>
+    <!--android:layout_row="0" android:layout_column="0" android:layout_columnSpan="2"-->
+
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_marginLeft="32dp"
+            android:layout_alignParentTop="true" android:layout_marginTop="251dp">
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Connect"
+                android:id="@+id/btnConnect"
+                android:onClick="clickButton" android:layout_weight="1"/>
+    </TableRow>
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_marginLeft="32dp"
+            android:layout_alignParentTop="true" android:layout_marginTop="347dp">
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send"
+                android:id="@+id/btnSend"
+                android:onClick="clickButton" android:layout_weight="1"/>
+    </TableRow>
+    <!--android:layout_row="1" android:layout_column="0"-->
+    <!--android:layout_row="1" android:layout_column="1"-->
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_marginLeft="32dp"
+            android:layout_alignParentTop="true" android:layout_marginTop="443dp">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Text info"
-                android:id="@+id/textInfo" android:layout_column="1"/>
+                android:id="@+id/textInfo" android:layout_column="0"/>
     </TableRow>
     <TableRow
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_marginLeft="32dp"
+            android:layout_alignParentTop="true" android:layout_marginTop="476dp">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Out Text"
                 android:id="@+id/textView" android:layout_row="3" android:layout_column="1"/>
     </TableRow>
-</TableLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText4"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText3"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editText2"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Button"
+                android:id="@+id/button"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Button"
+                android:id="@+id/button2"/>
+    </LinearLayout>
+    <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/textView4"/>
+    </ScrollView>
+    <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView2">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/textView5"/>
+    </ScrollView>
+</RelativeLayout>
