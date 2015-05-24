@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
     private EditText textId;
     private EditText textPort;
 
-    private Socket connect=null;
+    private Socket connect;
 
     private String textIP;
     private String outText;
@@ -69,19 +69,23 @@ public class MainActivity extends Activity {
 //                Toast.makeText(this, "Select button Send", Toast.LENGTH_SHORT).show();
 //                Toast.makeText(this, "Send messages ...", Toast.LENGTH_SHORT).show();
 //                outText = editText.getText().toString();
-                new SendDate().execute(editText.getText().toString());
-//                Toast.makeText(this, "All messages send to client", Toast.LENGTH_SHORT).show();
-//                textView.setText("\n" + text);
-//                editText.setText("");
+                if (connect.isConnected()) {
+                    new SendDate().execute(editText.getText().toString());
+                }else new CreateConnect().execute(textIP, port);
                 break;
         }
     }
 
     private class CreateConnect extends AsyncTask {
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Log.i(TAG, "START create socket IP = " + textIP + "\n Port = " + port);
+        }
+
+        @Override
         protected String doInBackground(Object[] params) {
-                try {
-                    Log.i(TAG, "START create socket IP = " + textIP + "\n Port = " + port);
+            try {
                     connect = new Socket(textIP, port);
                     Log.i(TAG, "Good create socket");
                 } catch (IOException e) {

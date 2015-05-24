@@ -24,7 +24,7 @@ public class MyServer {
 
             // create server socket
             try {
-                servers = new ServerSocket(4444, 5);
+                servers = new ServerSocket(5555, 5);
             } catch (IOException e) {
                 System.out.println("Couldn't listen to port 4444");
                 System.exit(-1);
@@ -57,6 +57,7 @@ public class MyServer {
             servers.close();
         }
     }
+
 
 //    private ServerSocket serverSocket;
 //    private Socket socket;
