@@ -8,155 +8,111 @@
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 tools:context=".MainActivity">
 
-    <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_marginLeft="32dp"
-            android:layout_alignParentTop="true" android:layout_marginTop="32dp">
-        <TextView
+       <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:id="@+id/ll_1">
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textId"
+                    android:hint="Enter IP adresss"
+                    android:inputType="phone"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_below="@id/ll_1"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/ll_2">
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textPort"
+                    android:hint="Enter PORT"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:layout_centerHorizontal="true"/>
+        </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_below="@id/ll_2"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/ll_3">
+        <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enter IP"
-                android:id="@+id/textView2" android:layout_column="0"/>
-        <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textId" android:layout_column="1" android:layout_weight="1"/>
-    </TableRow>
-    <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_marginLeft="32dp"
-            android:layout_alignParentTop="true" android:layout_marginTop="105dp">
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Enter PORT"
-                android:id="@+id/textView3" android:layout_column="0"/>
-        <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textPort" android:layout_column="1" android:layout_weight="1"/>
-    </TableRow>
-    <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_marginLeft="32dp"
-            android:layout_alignParentTop="true" android:layout_marginTop="178dp">
-        <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/editText" android:layout_weight="1"/>
-    </TableRow>
-    <!--android:layout_row="0" android:layout_column="0" android:layout_columnSpan="2"-->
-
-    <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_marginLeft="32dp"
-            android:layout_alignParentTop="true" android:layout_marginTop="251dp">
+                android:id="@+id/editText"
+                android:hint="Pllese enter yuor messages"
+                android:layout_weight="1"/>
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_below="@id/ll_3"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/ll_4">
         <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Connect"
                 android:id="@+id/btnConnect"
-                android:onClick="clickButton" android:layout_weight="1"/>
-    </TableRow>
-    <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_marginLeft="32dp"
-            android:layout_alignParentTop="true" android:layout_marginTop="347dp">
+                android:layout_weight="1"
+                android:background="#ff17ff0c"
+                android:onClick="clickButton"
+                android:textColor="#ffff0600"/>
+
         <Button
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Send"
                 android:id="@+id/btnSend"
-                android:onClick="clickButton" android:layout_weight="1"/>
-    </TableRow>
-    <!--android:layout_row="1" android:layout_column="0"-->
-    <!--android:layout_row="1" android:layout_column="1"-->
-    <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_marginLeft="32dp"
-            android:layout_alignParentTop="true" android:layout_marginTop="443dp">
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Text info"
-                android:id="@+id/textInfo" android:layout_column="0"/>
-    </TableRow>
-    <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_marginLeft="32dp"
-            android:layout_alignParentTop="true" android:layout_marginTop="476dp">
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Out Text"
-                android:id="@+id/textView" android:layout_row="3" android:layout_column="1"/>
-    </TableRow>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/editText4"/>
-    </LinearLayout>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/editText3"/>
-    </LinearLayout>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-        <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/editText2"/>
-    </LinearLayout>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button"/>
-    </LinearLayout>
-    <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-        <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button2"/>
+                android:layout_weight="1"
+                android:background="#fffcff0a"
+                android:onClick="clickButton"
+                android:textColor="#ff2610ff"/>
     </LinearLayout>
     <ScrollView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/scrollView">
+            android:id="@+id/scrollView"
+            android:layout_below="@id/ll_4"
+            android:background="#41000000">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/textView4"/>
+                android:id="@+id/textInfo"
+                android:hint="Text info"
+                android:textColor="#ffe8ffeb"
+                />
     </ScrollView>
     <ScrollView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/scrollView"
+            android:background="#fffcfffd"
             android:id="@+id/scrollView2">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
-                android:id="@+id/textView5"/>
+                android:id="@+id/textView"
+                android:hint="Text message"
+                android:textColor="#ff1e0b98"
+                />
     </ScrollView>
 </RelativeLayout>

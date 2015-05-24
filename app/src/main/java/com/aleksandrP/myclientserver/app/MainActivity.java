@@ -10,13 +10,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 
 
 public class MainActivity extends Activity {
+
+    private final int PORT = 5555;
+    private static final String TAG = "myLog";
 
     private EditText editText;
     private Button btnConnect;
@@ -27,14 +28,13 @@ public class MainActivity extends Activity {
     private EditText textPort;
 
     private Socket connect=null;
-    private ObjectInputStream oIn;
-    private ObjectOutputStream oOut;
 
+    private String textIP;
+    private String outText;
+    private String text;
+    private int port;
 
-    private String textIP = null;
-    private int port = 0;
-
-    private Log myLog;
+    private  PrintWriter printWriter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,68 +48,115 @@ public class MainActivity extends Activity {
         textInfo = (TextView) findViewById(R.id.textInfo);
         textId = (EditText) findViewById(R.id.textId);
         textPort = (EditText) findViewById(R.id.textPort);
-
     }
 
     public void clickButton(View view) {
         switch (view.getId()) {
             case R.id.btnConnect:
-                textIP = textId.getText().toString();
-                port = Integer.parseInt(textPort.getText().toString());
-                Toast.makeText(this, "Select button Connect", Toast.LENGTH_SHORT).show();
-                Toast.makeText(this, "Connect to " + textIP+" via "+port+" port", Toast.LENGTH_SHORT).show();
-                new CreateConnect().execute();
-                if (connect != null) {
-                    textInfo.setText("Port is: "+ port+ "\nIP adress: "+ textIP +" \n"+connect.toString());
-                } else {
-                    Toast.makeText(this, "Socket not valid", Toast.LENGTH_SHORT).show();
-                    textInfo.setText("Port is: "+ port+ "\nIP adress: "+ textIP);
+//                Toast.makeText(this, "Select button Connect", Toast.LENGTH_SHORT).show();
+                if (textId.getText().length() > 0 && textPort.getText().length()>0 ) {
+                    textIP = textId.getText().toString();
+                    port = Integer.parseInt(textPort.getText().toString());
+//                    Toast.makeText(this, "Connect to " + textIP+" via "+port+" port", Toast.LENGTH_SHORT).show();
+                }else {
+                    textIP = "192.168.0.66";
+                    port = PORT;
+//                    Toast.makeText(this, "IP adres : " +textIP+ "\nPort : "+port, Toast.LENGTH_SHORT).show();
                 }
+                new CreateConnect().execute(textIP, port);
                 break;
             case R.id.btnSend:
-                Toast.makeText(this, "Select button Send", Toast.LENGTH_SHORT).show();
-                Toast.makeText(this, "Send messages ", Toast.LENGTH_SHORT).show();
-                new SendDate().execute();
-                Toast.makeText(this, "All messages send to client", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Select button Send", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Send messages ...", Toast.LENGTH_SHORT).show();
+//                outText = editText.getText().toString();
+                new SendDate().execute(editText.getText().toString());
+//                Toast.makeText(this, "All messages send to client", Toast.LENGTH_SHORT).show();
+//                textView.setText("\n" + text);
+//                editText.setText("");
                 break;
         }
     }
 
     private class CreateConnect extends AsyncTask {
         @Override
-        protected Object doInBackground(Object[] params) {
-            try {
-                connect = new Socket("localhost", port);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        protected String doInBackground(Object[] params) {
+                try {
+                    Log.i(TAG, "START create socket IP = " + textIP + "\n Port = " + port);
+                    connect = new Socket(textIP, port);
+                    Log.i(TAG, "Good create socket");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return text ="Error in creare Connect "+ e.toString();
+                }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            super.onPostExecute(o);
+            if (connect != null) {
+                textInfo.setText("Port is: "+ port+ "\nIP adress: "+ textIP +" \n"+connect.toString());
+            } else {
+                Toast.makeText(getApplicationContext(), "Socket not valid", Toast.LENGTH_SHORT).show();
+                textInfo.setText("Port is: "+ port+ "\nIP adress: "+ textIP);
+            }
         }
     }
 
-    private class SendDate extends AsyncTask{
+    private class SendDate extends AsyncTask<String, String, String>{
         @Override
-        protected Object doInBackground(Object[] params) {
-            try {
-                oIn = new ObjectInputStream(connect.getInputStream());
-                oOut = new ObjectOutputStream(connect.getOutputStream());
-                textView.setText((String) oIn.readObject());
+        protected void onPreExecute() {
+            super.onPreExecute();
+            outText = editText.getText().toString();
+        }
 
-                oOut.flush();
-                oOut.writeObject(editText.getText().toString());
-
-                if (oIn != null){
-                    oIn.close();
+        @Override
+        protected String doInBackground(String[] params) {
+                try {
+                    getDatafromServer();
+                    printWriter = new PrintWriter(new OutputStreamWriter(connect.getOutputStream()), true);
+                    printWriter.println(outText);
+//                    if (printWriter != null) {
+//                        printWriter.close();
+//                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return text = "Error in send Date "+e.toString();
                 }
-                if (oOut != null){
-                    oOut.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(String o) {
+            super.onPostExecute(o);
+            Toast.makeText(getApplicationContext(), "All messages send to client", Toast.LENGTH_SHORT).show();
+            textView.setText("\n" + text);
+            editText.setText("");
+        }
+
+        void getDatafromServer() {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    boolean w = true;
+                    while (w) {
+                        try {
+                            new CreateConnect().execute();
+                            InputStream inputStream = connect.getInputStream();
+                            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+                            text = br.readLine();
+                            if (inputStream != null)
+                                inputStream.close();
+                            if (br != null)
+                                br.close();
+                            w = false;
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            text = "Error in the Run method "+ e.toString();
+                        }
+                    }
+                }
+            }).start();
         }
     }
 }
