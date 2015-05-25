@@ -3,4 +3,11 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="btnSend">Send</string>
+    <string name="btnConnect">Connect</string>
+    <string name="inputIPadress">Enter IP adresss</string>
+    <string name="inputPort">Enter PORT</string>
+    <string name="placeInputIP">Pllese enter yuor messages</string>
+    <string name="textInfo">Text info</string>
+    <string name="textMessage">Text message</string>
 </resources>
