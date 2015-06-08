@@ -11,87 +11,81 @@ import java.net.Socket;
  * Created by Aleksandr on 21.05.2015.
  */
 public class MyServer {
-
+    /**
+     *
+     * @throws IOException - исключение ввода вывода
+     */
     public static void main(String[] args) throws IOException {
         System.out.println("Welcome to Server side");
         BufferedReader in = null;
         PrintWriter out= null;
-
+/**
+ * в бесконечном цикле проверяем соединение
+ */
         while (true) {
 
             ServerSocket servers = null;
             Socket connect = null;
 
-            // create server socket
+            /**
+             * сreate server socket
+             */
+
             try {
+                /**
+                 * порт 5555, количество одновременных клиентов - 5
+                 */
                 servers = new ServerSocket(5555, 5);
             } catch (IOException e) {
-                System.out.println("Couldn't listen to port 4444");
+                /**
+                 *  порт 5555 по умолчанию
+                 */
+                System.out.println("Couldn't listen to port 5555");
                 System.exit(-1);
             }
 
             try {
+                /**
+                 *  сообщение о готовности
+                 */
                 System.out.print("Waiting for a client...");
                 connect = servers.accept();
+                /**
+                 *  сooбщение о подключении коиента
+                 */
                 System.out.println("Client  "+connect.toString()+"  is connected");
+                // сообщение о Socket
                 System.out.println(connect.toString());
             } catch (IOException e) {
                 System.out.println("Can't accept");
                 System.exit(-1);
             }
-
+            // создается буфер для входного потока
             in = new BufferedReader(new
                     InputStreamReader(connect.getInputStream()));
             out = new PrintWriter(connect.getOutputStream(), true);
             String input, output;
-
+            // сообщение об ожидании сообщения
             System.out.println("Wait for messages");
+            // в бесконечном цикле считуем информацию
             while ((input = in.readLine()) != null) {
+                // при введении слова exit, сервер прекращает работу
                 if (input.equalsIgnoreCase("exit")) break;
+                // выходное сообщение с припиской
                 out.println("S ::: " + input);
+                // для проверки выводим сообщение в консоль
                 System.out.println(input);
             }
+            // закрывается выходной поток
             out.close();
+            // закрывается входной поток
             in.close();
+            // закрывается Socket
             connect.close();
+            // закрывается Server
             servers.close();
         }
     }
 
 
-//    private ServerSocket serverSocket;
-//    private Socket socket;
-//    private ObjectInputStream input;
-//    private ObjectOutputStream output;
-//
-//    public static void main(String[] args) {
-//        MyServer myServer = new MyServer();
-//        myServer.startServer();
-//    }
-//
-//    private void startServer() {
-//        try {
-//            while (true) {
-//                serverSocket = new ServerSocket(4444, 10);
-//                System.out.println("Server is create");
-//                socket = serverSocket.accept();
-//                System.out.println("Connect is: "+ socket.toString());
-//                output = new ObjectOutputStream(socket.getOutputStream());
-//                input = new ObjectInputStream(socket.getInputStream());
-//                System.out.println("Your message is: " + (String) input.readObject());
-//                output.writeObject("Your message is: " + (String) input.readObject());
-//            }
-//        } catch (IOException e) {
-//            System.out.println("Error I/O ");
-//        } catch (ClassNotFoundException e) {
-//            System.out.println("Error Stream");
-//        }finally {
-//            try {
-//                input.close();
-//                output.close();
-//            } catch (IOException e) {
-//
-//            }
-//        }
-//    }
 }
